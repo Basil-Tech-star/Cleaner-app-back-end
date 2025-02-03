@@ -82,3 +82,7 @@ def get_cleaners():
     cleaners = Cleaner.query.all()
     cleaner_schema = CleanerSchema(many=True)
     return jsonify(cleaner_schema.dump(cleaners))
+
+@auth_bp.route('/cleaners', methods=['OPTIONS'])
+def handle_options():
+    return '', 200  # Respond with a 200 status and no body
