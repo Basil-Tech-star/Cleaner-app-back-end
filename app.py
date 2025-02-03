@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 # front_end_url = "http://localhost:5173"
-CORS(app, origins='http://localhost:5173')
+CORS(app, origins='https://online-professional-cleaner-app.vercel.app/')
 
 # Initialize extensions
 db.init_app(app)
