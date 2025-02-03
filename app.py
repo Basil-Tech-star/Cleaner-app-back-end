@@ -10,7 +10,9 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 app.config.from_object(Config)
-CORS(app)
+
+front_end_url = "http://localhost:5173/"
+CORS(app, origins= front_end_url)
 
 # Initialize extensions
 db.init_app(app)
