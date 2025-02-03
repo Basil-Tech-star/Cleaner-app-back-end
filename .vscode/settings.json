@@ -1,0 +1,14 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "aws-0-ap-south-1.pooler.supabase.com",
+      "port": 6543,
+      "driver": "PostgreSQL",
+      "name": "cleaner-app",
+      "database": "postgres",
+      "username": "postgres.wjzdqouhlgubscfuaibn",
+      "password": "agDlhQUiHDImty9d"
+    }
+  ]
+}
