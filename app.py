@@ -11,10 +11,8 @@ from flask_cors import CORS
 app = Flask(__name__)
 app.config.from_object(Config)
 
-# front_end_url = "http://localhost:5173"
 CORS(app, origins='https://online-professional-cleaner-app.vercel.app', methods=['GET', 'POST','OPTIONS'], allow_headers=['Content-Type', 'Authorization'])
 
-# CORS(app, origins='http://localhost:5173', methods=['GET', 'POST','OPTIONS'], allow_headers=['Content-Type', 'Authorization'])
 
 # extensions intialized
 db.init_app(app)
