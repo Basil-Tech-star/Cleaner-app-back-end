@@ -1,1 +1,207 @@
-Single-database configuration for Flask.
+## Professional Cleaner Booking API
+
+This is a back-end application built with Flask for managing professional cleaner bookings. The app provides the following functionalities:
+
+- User signup and login
+- Cleaner management (adding cleaners)
+- Cleaner booking system
+- Viewing available cleaners
+- JWT authentication for secure routes
+
+## Features
+
+- **Signup**: Clients can sign up with their name, phone number, location, and password.
+- **Login**: Clients can log in using their phone number and password to receive a JWT access token for authentication.
+- **Add Cleaner**: Admins can add new cleaners to the platform by providing their name, phone number, cleaning service, and location.
+- **Book Cleaner**: Clients can book a cleaner by providing the cleaner's ID.
+- **View Cleaners**: Clients can view a list of all available cleaners.
+
+## Technologies Used
+
+- **Flask**: The main Python web framework used for this back-end API.
+- **Flask-JWT-Extended**: For handling JWT authentication and access tokens.
+- **Flask-SQLAlchemy**: To handle database operations using SQLAlchemy ORM.
+- **Flask-Migrate**: For database migrations.
+- **Flask-CORS**: To allow cross-origin requests from the front-end.
+
+## Requirements
+
+- Python 3.7+
+- Flask
+- Flask-JWT-Extended
+- Flask-SQLAlchemy
+- Flask-Migrate
+- Flask-CORS
+- Marshmallow
+- Bcrypt
+
+## Installation
+
+1. Clone the repository to your local machine:
+
+    ```bash
+    git clone https://github.com/Basil-Tech-star/Cleaner-app-back-end
+    cd cleaner-booking-back-end
+    ```
+
+2. Create a virtual environment:
+
+    ```bash
+    python3 -m venv venv
+    ```
+
+3. Activate the virtual environment:
+
+    - On Windows:
+      ```bash
+      venv\Scripts\activate
+      ```
+
+    - On macOS/Linux:
+      ```bash
+      source venv/bin/activate
+      ```
+
+4. Install the required dependencies:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+5. Set up environment variables for your database and JWT keys in your `.env` file or directly in the shell:
+
+    ```bash
+    export DATABASE_URL="your-database-url"
+    export SECRET_KEY="your-secret-key"
+    export JWT_SECRET_KEY="your-jwt-secret-key"
+    ```
+
+6. Run database migrations (if any):
+
+    ```bash
+    flask db upgrade
+    ```
+
+## Running the Application
+
+To start the Flask development server, run:
+
+```bash
+python app.py
+```
+
+The API will be available at `http://localhost:5000`.
+
+## API Endpoints
+
+### User Authentication
+
+- **POST `/signup`**: Create a new client account.  
+  **Request body**:
+  ```json
+  {
+    "name": "John Doe",
+    "phone_number": "1234567890",
+    "location": "New York",
+    "password": "password123"
+  }
+  ```
+  **Response**:
+  ```json
+  {
+    "message": "Client registered successfully!"
+  }
+  ```
+
+- **POST `/login`**: Log in to obtain a JWT token.  
+  **Request body**:
+  ```json
+  {
+    "phone_number": "1234567890",
+    "password": "password123"
+  }
+  ```
+  **Response**:
+  ```json
+  {
+    "access_token": "your-jwt-token"
+  }
+  ```
+
+### Cleaner Management (Admin Only)
+
+- **POST `/cleaner`**: Add a new cleaner (Admin-only route, requires JWT).  
+  **Request body**:
+  ```json
+  {
+    "name": "Jane Smith",
+    "phone_number": "9876543210",
+    "cleaning_service": "House Cleaning",
+    "location": "New York"
+  }
+  ```
+  **Response**:
+  ```json
+  {
+    "message": "Cleaner added successfully!"
+  }
+  ```
+
+### Booking Management
+
+- **POST `/book`**: Book a cleaner (requires JWT).  
+  **Request body**:
+  ```json
+  {
+    "cleaner_id": 1
+  }
+  ```
+  **Response**:
+  ```json
+  {
+    "message": "Cleaner booked successfully!"
+  }
+  ```
+
+### View Cleaners
+
+- **GET `/cleaners`**: Retrieve a list of available cleaners.  
+  **Response**:
+  ```json
+  [
+    {
+      "id": 1,
+      "name": "Jane Smith",
+      "phone_number": "9876543210",
+      "cleaning_service": "House Cleaning",
+      "location": "New York",
+      "rating": 4.5
+    },
+    ...
+  ]
+  ```
+
+## CORS Configuration
+
+The API allows CORS (Cross-Origin Resource Sharing) from the front-end URL:
+
+- `https://online-professional-cleaner-app.vercel.app` (production)
+- `http://localhost:5173` (development)
+
+To add or modify the allowed origins, update the CORS settings in the `app.py` file.
+
+## Database Schema
+
+The database contains three main models:
+
+1. **Cleaner**: Represents a cleaner available for bookings. Fields include `id`, `name`, `phone_number`, `cleaning_service`, `location`, and `rating`.
+2. **Client**: Represents a client who can book a cleaner. Fields include `id`, `name`, `phone_number`, `location`, and `password`.
+3. **Booking**: Represents a booking of a cleaner by a client. Fields include `id`, `cleaner_id`, `client_id`, and `status`.
+
+## License
+
+This project is licensed under the Basil Wabuke MIT License.
+
+## Contributing
+
+Feel free to fork the repository, create a branch, and submit a pull request. Please ensure to write tests for any new features or fixes.
