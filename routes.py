@@ -9,9 +9,14 @@ import bcrypt
 
 auth_bp = Blueprint('auth', __name__)
 
+
+
 # Route for user registration
+
 @auth_bp.route('/signup', methods=['POST'])
 def signup():
+    if request.method == 'OPTIONS':
+        return '', 200
     data = request.get_json()
     name = data['name']
     phone_number = data['phone_number']
@@ -29,6 +34,8 @@ def signup():
 # Route for user login
 @auth_bp.route('/login', methods=['POST'])
 def login():
+    if request.method == 'OPTIONS':
+        return '', 200
     data = request.get_json()
     phone_number = data['phone_number']
     password = data['password']
@@ -85,4 +92,4 @@ def get_cleaners():
 
 @auth_bp.route('/cleaners', methods=['OPTIONS'])
 def handle_options():
-    return '', 200  # Respond with a 200 status and no body
+    return '', 200  

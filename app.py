@@ -14,15 +14,17 @@ app.config.from_object(Config)
 # front_end_url = "http://localhost:5173"
 CORS(app, origins='https://online-professional-cleaner-app.vercel.app', methods=['GET', 'POST','OPTIONS'], allow_headers=['Content-Type', 'Authorization'])
 
-# Initialize extensions
+# CORS(app, origins='http://localhost:5173', methods=['GET', 'POST','OPTIONS'], allow_headers=['Content-Type', 'Authorization'])
+
+# extensions intialized
 db.init_app(app)
 jwt = JWTManager(app)
 migrate = Migrate(app, db)
 
-# Register blueprints
+# Registering blueprints
 app.register_blueprint(auth_bp)
 
-# Create tables
+# Creating tables
 with app.app_context():
     db.create_all()
 
